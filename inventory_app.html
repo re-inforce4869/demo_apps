@@ -3,8 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- ============================================
+       【設定項目】以下の3箇所を変更してください
+       ============================================ -->
+  
+  <!-- 1. ファビコン画像ID（Google DriveのファイルID） -->
   <link rel="icon" href="https://lh3.googleusercontent.com/d/1jpjc8HZp3HGuhaXQUJAoky7Hkxl3ny7P">
+  
+  <!-- 2. ページタイトル -->
   <title>在庫管理デモアプリ</title>
+  
   <style>
     * {
       margin: 0;
@@ -95,20 +104,24 @@
 <body>
   <!-- スプラッシュ画面 -->
   <div id="splash">
+    <!-- 3. スプラッシュ画像ID（Google DriveのファイルID） -->
     <img src="https://lh3.googleusercontent.com/d/1jpjc8HZp3HGuhaXQUJAoky7Hkxl3ny7P" alt="Logo">
     <div class="loading-text">NOW LOADING...</div>
     <div class="spinner"></div>
   </div>
   
   <!-- メインコンテンツ -->
-  <iframe id="app" src="https://script.google.com/macros/s/AKfycbzxHo_lHLlGwwFtRzs0CR_epgWps7fqPihZANgxooXzkhiNBVzd05VfsOHfs-yEOrNg/exec"></iframe>
+  <!-- 4. GASアプリのデプロイURL -->
+  <iframe 
+    id="app" 
+    src="https://script.google.com/macros/s/AKfycbzxHo_lHLlGwwFtRzs0CR_epgWps7fqPihZANgxooXzkhiNBVzd05VfsOHfs-yEOrNg/exec"
+    allow="camera; microphone; popups; popups-to-escape-sandbox"
+  ></iframe>
   
   <script>
-    // iframeの読み込み完了を待つ
     const splash = document.getElementById('splash');
     const app = document.getElementById('app');
     
-    // 最低表示時間（ミリ秒）
     const minDisplayTime = 2000;
     const startTime = Date.now();
     
@@ -116,17 +129,18 @@
       const elapsedTime = Date.now() - startTime;
       const remainingTime = Math.max(0, minDisplayTime - elapsedTime);
       
-      // 最低表示時間経過後にフェードアウト
       setTimeout(function() {
         splash.classList.add('fade-out');
         
-        // フェードアウト完了後にスプラッシュを非表示、iframeを表示
         setTimeout(function() {
           splash.style.display = 'none';
           app.classList.add('show');
         }, 800);
       }, remainingTime);
     });
+  </script>
+</body>
+</html>
   </script>
 </body>
 </html>
